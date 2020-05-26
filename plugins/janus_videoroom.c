@@ -2271,7 +2271,11 @@ int janus_videoroom_init(janus_callbacks *callback, const char *config_path) {
 					videoroom->do_svc = TRUE;
 				} else {
 					JANUS_LOG(LOG_WARN, "SVC is only supported, in an experimental way, for VP9 only rooms: disabling it...\n");
+					videoroom->do_svc = FALSE;
 				}
+			}
+			else {
+				videoroom->do_svc = FALSE;
 			}
 			videoroom->audiolevel_ext = TRUE;
 			if(audiolevel_ext != NULL && audiolevel_ext->value != NULL)
@@ -3116,7 +3120,11 @@ static json_t *janus_videoroom_process_synchronous_request(janus_videoroom_sessi
 				videoroom->do_svc = TRUE;
 			} else {
 				JANUS_LOG(LOG_WARN, "SVC is only supported, in an experimental way, for VP9 only rooms: disabling it...\n");
+				videoroom->do_svc = FALSE;
 			}
+		}
+		else {
+			videoroom->do_svc = FALSE;
 		}
 		videoroom->audiolevel_ext = audiolevel_ext ? json_is_true(audiolevel_ext) : TRUE;
 		videoroom->audiolevel_event = audiolevel_event ? json_is_true(audiolevel_event) : FALSE;
